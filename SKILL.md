@@ -13,12 +13,12 @@ Before using this skill, ensure the Linear MCP server is installed and authentic
 
 **Quick setup for Claude Code:**
 ```bash
-claude mcp add linear-server -- npx -y @anthropic-ai/linear-mcp-server
+claude mcp add --transport http linear-server https://mcp.linear.app/mcp
 ```
 
 **Quick setup for Codex:**
 ```bash
-codex mcp add linear-server -- npx -y @anthropic-ai/linear-mcp-server
+codex mcp add linear --url https://mcp.linear.app/mcp
 ```
 
 For Cursor setup and detailed instructions for all tools, see `setup-guide.md` in this skill directory.
