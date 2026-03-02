@@ -74,9 +74,34 @@ Every issue description MUST include these two sections:
 
 When creating an issue via the Linear MCP, **always assign it to "me"** (the current authenticated user) unless the user explicitly specifies a different assignee.
 
-### Default Status
+### Issue Status Lifecycle
 
-When creating an issue, **set the status to "Todo"** unless the user explicitly specifies a different status. Do NOT leave issues in the default "Backlog" state — Backlog is a collection pool for unplanned work, while Todo indicates the issue is confirmed and ready to be worked on.
+Linear issues have 6 statuses. **Proactively update issue status** as the user's work progresses:
+
+| Status | Type | When to use |
+|--------|------|-------------|
+| **Backlog** | backlog | Unplanned — collected but not yet confirmed |
+| **Todo** | unstarted | Confirmed and ready to be worked on |
+| **In Progress** | started | Actively being worked on |
+| **Done** | completed | Work finished and verified |
+| **Canceled** | canceled | Will not be done |
+| **Duplicate** | canceled | Already covered by another issue |
+
+**Status transition rules:**
+
+```
+Backlog → Todo → In Progress → Done
+                              → Canceled
+                              → Duplicate
+```
+
+- **Creating an issue**: Set to **Todo** (not Backlog) unless user specifies otherwise
+- **User starts working on an issue**: Update to **In Progress**
+- **Committing code for an issue**: Update to **Done**
+- **User says to cancel/skip**: Update to **Canceled**
+- **User identifies a duplicate**: Update to **Duplicate**
+
+**Proactive status updates:** When context makes it obvious (e.g., user says "I'm working on ONE-42" or "let's start ONE-42"), update the status to In Progress without needing to be asked. Similarly, when committing code linked to an issue, update to Done automatically.
 
 ### Subagent Delegation for Linear Operations
 
@@ -122,7 +147,7 @@ About to commit?
 
 1. Before committing, ask: *"Is this commit related to a Linear issue? If so, which one (e.g., ONE-123)?"*
 2. If user provides an issue ID:
-   - Use a **subagent** to update the issue status to a **completed state** (check the team's available statuses first if unsure — common names: "Done", "Completed", "Closed")
+   - Use a **subagent** to update the issue status to **Done**
    - Include the issue ID in the commit message, e.g.: `[ONE-123] Fix cart crash on empty submission`
 3. If user says no issue is related, proceed with the commit normally.
 
@@ -143,7 +168,9 @@ About to commit?
 | Issue title | `[Type] Short description` |
 | Issue description | Background + Acceptance Criteria sections |
 | Assign issue | Default to "me" unless user specifies otherwise |
-| Issue status | Default to "Todo" unless user specifies otherwise |
+| New issue status | Default to "Todo" |
+| Start working | Update to "In Progress" |
+| Commit linked to issue | Update to "Done" |
 | Read/write Linear | Delegate to lightweight subagent |
 | Before commit | Confirm issue ID, update status to completed |
 | Commit message | `[ISSUE-ID] message` |
