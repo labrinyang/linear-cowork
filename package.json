@@ -1,0 +1,25 @@
+{
+  "name": "linear-cowork",
+  "version": "1.0.0",
+  "description": "Linear MCP collaboration skill for vibe coding teams — issue conventions, workflow automation, and pre-commit checks",
+  "author": "labrinyang",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/labrinyang/linear-cowork"
+  },
+  "files": [
+    "SKILL.md",
+    "setup-guide.md"
+  ],
+  "keywords": [
+    "linear",
+    "mcp",
+    "skill",
+    "claude-code",
+    "codex",
+    "cursor",
+    "vibe-coding",
+    "collaboration"
+  ]
+}
