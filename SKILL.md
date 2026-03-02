@@ -103,6 +103,40 @@ Backlog → Todo → In Progress → Done
 
 **Proactive status updates:** When context makes it obvious (e.g., user says "I'm working on ONE-42" or "let's start ONE-42"), update the status to In Progress without needing to be asked. Similarly, when committing code linked to an issue, update to Done automatically.
 
+### Labels
+
+Every issue MUST have a label. Choose based on the issue type:
+
+| Label | Color | When to use |
+|-------|-------|-------------|
+| **Feature** | purple | New functionality (`[Feature]` issues) |
+| **Bug** | red | Bug fixes (`[Bug]` issues) |
+| **Improvement** | blue | Enhancements, refactors, chores, docs (`[Refactor]`, `[Chore]`, `[Docs]` issues) |
+
+**Mapping from issue type to label:**
+
+| Issue Type | Label |
+|------------|-------|
+| `[Feature]` | Feature |
+| `[Bug]` | Bug |
+| `[Chore]` | Improvement |
+| `[Refactor]` | Improvement |
+| `[Docs]` | Improvement |
+
+Apply the label automatically when creating an issue — do not ask the user unless the mapping is ambiguous.
+
+### Priority
+
+Every issue MUST have a priority set. **Default to Medium (3)** unless the user specifies otherwise.
+
+| Value | Level | When to use |
+|-------|-------|-------------|
+| 0 | No priority | Never use as default |
+| 1 | Urgent | Production down, data loss, security vulnerability |
+| 2 | High | Blocks other work, major user-facing issue |
+| 3 | **Medium** | **Default** — standard feature work, normal bugs |
+| 4 | Low | Nice-to-have, minor polish, tech debt |
+
 ### Subagent Delegation for Linear Operations
 
 **CRITICAL: All Linear MCP read/write operations SHOULD be delegated to a lightweight subagent to save context.**
@@ -168,6 +202,8 @@ About to commit?
 | Issue title | `[Type] Short description` |
 | Issue description | Background + Acceptance Criteria sections |
 | Assign issue | Default to "me" unless user specifies otherwise |
+| Label | Auto-apply: Feature / Bug / Improvement based on issue type |
+| Priority | Default to Medium (3) unless user specifies otherwise |
 | New issue status | Default to "Todo" |
 | Start working | Update to "In Progress" |
 | Commit linked to issue | Update to "Done" |
