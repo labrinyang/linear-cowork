@@ -99,6 +99,45 @@ In Cursor's AI chat, ask it to list your Linear issues. If it returns results, t
 
 ---
 
+## Windsurf
+
+1. `Ctrl/Cmd+,` to open Windsurf settings
+2. Scroll to **Cascade > MCP servers**
+3. Select **Add Server > Add custom server**
+4. Add the following:
+
+```json
+{
+  "mcpServers": {
+    "linear": {
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/mcp"]
+    }
+  }
+}
+```
+
+---
+
+## Zed
+
+`Cmd+,` to open Zed settings, then add:
+
+```json
+{
+  "context_servers": {
+    "linear": {
+      "source": "custom",
+      "command": "npx",
+      "args": ["-y", "mcp-remote", "https://mcp.linear.app/mcp"],
+      "env": {}
+    }
+  }
+}
+```
+
+---
+
 ## Other Clients
 
 For any MCP-compatible client:

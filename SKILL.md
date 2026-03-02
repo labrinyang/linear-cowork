@@ -74,6 +74,10 @@ Every issue description MUST include these two sections:
 
 When creating an issue via the Linear MCP, **always assign it to "me"** (the current authenticated user) unless the user explicitly specifies a different assignee.
 
+### Default Status
+
+When creating an issue, **set the status to "Todo"** unless the user explicitly specifies a different status. Do NOT leave issues in the default "Backlog" state — Backlog is a collection pool for unplanned work, while Todo indicates the issue is confirmed and ready to be worked on.
+
 ### Subagent Delegation for Linear Operations
 
 **CRITICAL: All Linear MCP read/write operations SHOULD be delegated to a lightweight subagent to save context.**
@@ -139,6 +143,7 @@ About to commit?
 | Issue title | `[Type] Short description` |
 | Issue description | Background + Acceptance Criteria sections |
 | Assign issue | Default to "me" unless user specifies otherwise |
+| Issue status | Default to "Todo" unless user specifies otherwise |
 | Read/write Linear | Delegate to lightweight subagent |
 | Before commit | Confirm issue ID, update status to completed |
 | Commit message | `[ISSUE-ID] message` |

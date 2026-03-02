@@ -1,12 +1,11 @@
 # linear-cowork
 
-Standardized Linear collaboration skill for vibe coding teams using Claude Code, Codex, and Cursor.
+Standardized Linear collaboration skill for vibe coding teams.
 
 ## Prerequisites
 
-- Node.js >= 18
 - A [Linear](https://linear.app) account
-- One of: [Claude Code](https://claude.ai/code), [Codex](https://openai.com/codex), or [Cursor](https://cursor.com)
+- One of: [Claude Code](https://claude.ai/code), [Codex](https://openai.com/codex), [Cursor](https://cursor.com), VS Code, Windsurf, or Zed
 
 ## Install
 
@@ -22,10 +21,10 @@ npx skills add labrinyang/linear-cowork -g
 
 ## What This Skill Does
 
-- Guides Linear MCP setup for Claude Code, Codex, and Cursor
+- Guides Linear MCP setup for Claude Code, Codex, Cursor, VS Code, Windsurf, and Zed
 - Enforces issue naming: `[Type] Short description`
 - Enforces issue description template: Background + Acceptance Criteria
-- Auto-assigns issues to the current user
+- Auto-assigns issues to the current user with "Todo" status
 - Delegates Linear operations to lightweight subagents (saves context)
 - Pre-commit check: confirms issue linkage and auto-updates status to completed
 
