@@ -28,6 +28,21 @@ npx skills add labrinyang/linear-cowork -g
 - Delegates Linear operations to lightweight subagents (saves context)
 - Pre-commit check: confirms issue linkage and auto-updates status to completed
 
+## Usage
+
+Once installed, just type `/linear-cowork` in your AI coding tool to activate the skill. Then work as usual — the skill handles the rest automatically:
+
+```
+/linear-cowork          ← activate the skill
+Create an issue for...  ← issues follow naming & description conventions
+Fix the bug in...       ← before commit, skill confirms issue linkage
+```
+
+**That's it.** The skill will:
+- Format issue titles as `[Type] Description` and fill in Background + Acceptance Criteria
+- Assign issues to you with "Todo" status
+- Prompt you to link commits to issues and auto-update status to "Done"
+
 ## Manual Install
 
 Copy `SKILL.md` and `setup-guide.md` to your skills directory:
