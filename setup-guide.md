@@ -18,15 +18,7 @@ claude mcp add --transport http linear-server https://mcp.linear.app/mcp
 
 ### Authenticate
 
-Run `/mcp` in Claude Code to trigger the OAuth flow. Follow the browser prompt to grant access.
-
-### Verify
-
-```bash
-claude mcp list
-```
-
-You should see `linear-server` listed and connected.
+Run `/mcp` in Claude Code. You will see `linear-server` listed as needing authentication — click it to open the browser OAuth flow and grant access.
 
 ---
 
