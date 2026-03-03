@@ -137,25 +137,41 @@ Every issue MUST have a priority set. **Default to Medium (3)** unless the user 
 | 3 | **Medium** | **Default** — standard feature work, normal bugs |
 | 4 | Low | Nice-to-have, minor polish, tech debt |
 
-### Subagent Delegation for Linear Operations
+### Subagent Strategy
 
-**CRITICAL: All Linear MCP read/write operations SHOULD be delegated to a lightweight subagent to save context.**
+Use different models for different tasks to balance cost and quality:
 
-Linear data (issue lists, descriptions, comments) can be very verbose and wastes main conversation context.
+| Task | Model | Why |
+|------|-------|-----|
+| Read from Linear (list issues, get details) | Haiku subagent | Cheap, fast, repetitive |
+| Write to Linear (create/update issues, comments) | Haiku subagent | Simple API calls |
+| Explore codebase for issue context | Explore subagent | Efficient file search |
+| Draft issue content (title, description, criteria) | **Main model** | Requires quality writing |
 
-**How to delegate (by tool):**
-- **Claude Code:** Use the Task tool with `subagent_type="general-purpose"` and `model="haiku"`
-- **Codex / Cursor:** If subagent spawning is available, use it. Otherwise, proceed with direct MCP calls but keep interactions concise — request only the fields you need.
+**Issue creation workflow:**
 
-**When to delegate:**
-- Listing issues
-- Reading issue details
-- Creating new issues
-- Updating issue status, assignee, or description
-- Adding comments to issues
-- Any other Linear MCP operation
+```
+1. Haiku    → Read Linear (check existing issues, projects, team context)
+2. Explore  → Search codebase if needed (understand context for the issue)
+3. Main     → Draft issue title, description, and acceptance criteria
+4. Preview  → Show draft to user for confirmation
+5. Haiku    → Submit to Linear after user approves
+```
 
-**Exception:** If the user is actively discussing a specific issue and needs real-time back-and-forth, you may use the MCP tools directly. But default to subagent delegation.
+**Issue update workflow:**
+
+```
+1. Haiku    → Read current issue state from Linear
+2. Main     → Determine changes needed (may explore codebase if needed)
+3. Preview  → Show changes to user for confirmation (if content changes)
+4. Haiku    → Apply updates to Linear
+```
+
+**Key rules:**
+- **Always preview issue content before submission.** Show the user the full title, description, labels, priority, and status before creating or making content changes.
+- Status-only updates (e.g., Todo → In Progress) do NOT need preview — apply directly.
+- Simple reads and writes go through Haiku to save context tokens.
+- Content that users will see (titles, descriptions, criteria) must be drafted by the main model for quality.
 
 ### Project Organization
 
@@ -207,7 +223,8 @@ About to commit?
 | New issue status | Default to "Todo" |
 | Start working | Update to "In Progress" |
 | Commit linked to issue | Update to "Done" |
-| Read/write Linear | Delegate to lightweight subagent |
+| Read/write Linear | Haiku subagent |
+| Draft issue content | Main model, then preview before submit |
 | Before commit | Confirm issue ID, update status to completed |
 | Commit message | `[ISSUE-ID] message` |
 | Multiple related issues | Group under a Project |
